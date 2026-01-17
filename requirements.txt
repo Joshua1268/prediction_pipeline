@@ -1,0 +1,30 @@
+# Core ML/Data Libraries
+pandas>=2.0.0
+numpy>=1.20.0
+scikit-learn>=1.0.0
+xgboost>=1.6.0
+optuna>=3.0.0
+tqdm>=4.0.0
+statsmodels>=0.13.0
+scipy>=1.10.0
+
+# Neural Prophet et Dépendances PyTorch
+# ATTENTION: La spécification "+cpu" et l'URL d'indexage sont retirées.
+# Pip installera la version CPU par défaut pour l'architecture aarch64 (ARM).
+neuralprophet>=0.6.1
+
+torch==2.3.1
+torchaudio==2.3.1
+
+# MLOps & Database
+mlflow>=2.0.0
+sqlite-utils>=3.0.0
+pymysql>=1.0.2
+python-dotenv>=0.21.0
+boto3
+
+# Utilitaires
+holidays
+sshtunnel
+
+paramiko==2.11.0

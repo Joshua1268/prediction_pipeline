@@ -1,0 +1,23 @@
+{
+    "best_auc": 0.9136628244465337,
+    "parameters": {
+        "n_estimators": 227,
+        "max_depth": 10,
+        "learning_rate": 0.0524970162614085,
+        "subsample": 0.7478765479559847,
+        "colsample_bytree": 0.7732302414515212,
+        "gamma": 1.9116216765300549,
+        "reg_alpha": 1.5446319091976357,
+        "reg_lambda": 3.6303405860293503,
+        "min_child_weight": 2
+    },
+    "features": [
+        "day_of_week",
+        "week",
+        "standard_id",
+        "month_of_year",
+        "active_lag1",
+        "stockout_lag7",
+        "is_holiday"
+    ]
+}
