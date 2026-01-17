@@ -28,3 +28,7 @@ holidays
 sshtunnel
 
 paramiko==2.11.0
+
+# Web Interface
+streamlit>=1.28.0
+plotly>=5.0.0
