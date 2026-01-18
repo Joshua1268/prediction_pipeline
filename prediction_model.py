@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-Fruits & Vegetables Prediction Model
-This module implements a specialized prediction model for fruits and vegetables sales forecasting.
-"""
+
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -85,19 +82,23 @@ class FruitsVegetablesPredictionModel:
 
         return df_processed
 
-    def prepare_features_and_target(self, df_processed):
+    def prepare_features_and_target(self, df_processed, for_training=True):
         """
-        Prepare features (X) and target (y) for training.
+        Prepare features (X) and target (y) for training or prediction.
 
         Args:
             df_processed (pd.DataFrame): Processed dataframe
+            for_training (bool): Whether preparing for training (True) or prediction (False)
 
         Returns:
-            tuple: Features (X) and target (y)
+            tuple: Features (X) and target (y) if for_training is True, else just features (X)
         """
         X = df_processed[self.feature_columns]
-        y = df_processed[self.target_column]
-        return X, y
+        if for_training and self.target_column in df_processed.columns:
+            y = df_processed[self.target_column]
+            return X, y
+        else:
+            return X, None
 
     def train(self, df, model_type='random_forest'):
         """
@@ -114,7 +115,7 @@ class FruitsVegetablesPredictionModel:
         df_processed = self.preprocess_data(df)
 
         print("Preparing features and target...")
-        X, y = self.prepare_features_and_target(df_processed)
+        X, y = self.prepare_features_and_target(df_processed, for_training=True)
 
         print("Splitting data into train and test sets...")
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -163,7 +164,7 @@ class FruitsVegetablesPredictionModel:
             raise ValueError("Model has not been trained yet. Call train() first.")
 
         df_processed = self.preprocess_data(df)
-        X, _ = self.prepare_features_and_target(df_processed)
+        X, _ = self.prepare_features_and_target(df_processed, for_training=False)
 
         predictions = self.model.predict(X)
         return predictions
@@ -264,7 +265,6 @@ class FruitsVegetablesForecastingModel:
         # Make predictions
         predictions = self.prediction_model.predict(future_df)
 
-        # Create forecast results with adjusted confidence intervals for perishable goods
         forecast_results = []
         for i, pred in enumerate(predictions):
             # Adjust confidence intervals based on perishability
@@ -317,8 +317,6 @@ class FruitsVegetablesForecastingModel:
         # Account for spoilage based on shelf life
         forecast['estimated_stock'] = current_stock - forecast['cumulative_demand']
 
-        # Adjust reorder timing based on shelf life
-        # For shorter shelf life products, reorder sooner
         adjusted_reorder_level = reorder_level if shelf_life > 10 else reorder_level * 1.5
 
         # Find when to reorder
@@ -326,7 +324,6 @@ class FruitsVegetablesForecastingModel:
 
         if not reorder_dates.empty:
             suggested_reorder_date = reorder_dates.iloc[0]['date']
-            # Adjust quantity based on shelf life and demand pattern
             suggested_quantity = int(adjusted_reorder_level * 2.5) if shelf_life < 7 else int(adjusted_reorder_level * 2)
 
             return {
@@ -366,7 +363,6 @@ class FruitsVegetablesForecastingModel:
         # Calculate average demand over the forecast period
         avg_demand = forecast['predicted_quantity'].mean()
 
-        # Determine pricing strategy based on shelf life and demand
         if shelf_life <= 5:  # Highly perishable
             if avg_demand < 10:  # Low demand
                 suggested_price = base_price * 0.8  # Discount to move inventory
@@ -410,7 +406,6 @@ def evaluate_model_performance(actual_values, predicted_values):
     rmse = np.sqrt(mse)
     r2 = r2_score(actual_values, predicted_values)
 
-    # Calculate MAPE (Mean Absolute Percentage Error)
     mape = np.mean(np.abs((actual_values - predicted_values) / actual_values)) * 100
 
     return {
@@ -423,11 +418,8 @@ def evaluate_model_performance(actual_values, predicted_values):
 
 
 if __name__ == "__main__":
-    # Example usage
     print("Fruits & Vegetables Prediction Model - Example Usage")
 
-    # This would normally load your synthetic data
-    # For now, we'll show how it would work
     print("\nTo use this model:")
     print("1. Load your fruits and vegetables sales data into a pandas DataFrame")
     print("2. Initialize the FruitsVegetablesPredictionModel()")
@@ -435,7 +427,6 @@ if __name__ == "__main__":
     print("4. Use model.predict(new_data) to make predictions")
     print("5. Save the model with model.save_model(filepath)")
 
-    # Example of how to use the demand forecasting model
     print("\nFruits & Vegetables Forecasting Example:")
     print("1. Initialize FruitsVegetablesForecastingModel()")
     print("2. Call forecast_demand(historical_data, product_id, days_ahead)")

@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-Fruits & Vegetables Synthetic Data Generator
-This module generates realistic synthetic sales data for fruits and vegetables.
-"""
+
 import csv
 import random
 from datetime import datetime, timedelta
