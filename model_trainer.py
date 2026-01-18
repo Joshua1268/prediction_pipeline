@@ -4,12 +4,12 @@ from neuralprophet import NeuralProphet
 import pickle
 import os
 from datetime import datetime, timedelta
-from prediction_model import ProductPredictionModel
+from predictor import ProductPredictor
 
 
 class ModelTrainer:
     def __init__(self):
-        self.predictor = ProductPredictionModel()
+        self.predictor = ProductPredictor()
         self.model_path = "models/trained_model.pkl"
         
     def load_or_train_model(self):
@@ -27,7 +27,6 @@ class ModelTrainer:
             self.predictor.train_model(data)
             
             # Sauvegarder le modèle entraîné
-            os.makedirs(os.path.dirname(self.model_path), exist_ok=True)
             with open(self.model_path, 'wb') as f:
                 pickle.dump(self.predictor, f)
                 
