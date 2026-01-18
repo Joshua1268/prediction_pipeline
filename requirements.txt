@@ -10,3 +10,5 @@ streamlit>=1.20.0
 # Utilities
 python-dotenv>=0.21.0
 holidays
+
+watchdog==6.0.0

@@ -37,38 +37,40 @@ def main():
                                     "Planification des stocks",
                                     "Optimisation des prix"])
     
-    # Generate synthetic data if not already present
+    # Generate synthetic data if not already present with loading indicator
     data_dir = "data"
     sales_data_path = os.path.join(data_dir, "fv_sales_data.csv")
     inventory_data_path = os.path.join(data_dir, "fv_inventory_data.csv")
     customer_data_path = os.path.join(data_dir, "fv_customer_data.csv")
-    
+
     if not all(os.path.exists(path) for path in [sales_data_path, inventory_data_path, customer_data_path]):
-        st.info("Génération de données synthétiques de fruits et légumes pour la démonstration...")
-        generator = FruitsVegetablesDataGenerator(start_date="2023-01-01", end_date="2024-12-31")
-        sales_data, inventory_data, customer_data = generator.generate_all_data()
+        with st.spinner("Génération des données synthétiques de fruits et légumes..."):
+            st.info("Génération de données synthétiques de fruits et légumes pour la démonstration...")
+            generator = FruitsVegetablesDataGenerator(start_date="2023-01-01", end_date="2024-12-31")
+            sales_data, inventory_data, customer_data = generator.generate_all_data()
 
-        # Save the generated data
-        os.makedirs(data_dir, exist_ok=True)
-        sales_df = pd.DataFrame(sales_data)
-        inventory_df = pd.DataFrame(inventory_data)
-        customer_df = pd.DataFrame(customer_data)
+            # Save the generated data
+            os.makedirs(data_dir, exist_ok=True)
+            sales_df = pd.DataFrame(sales_data)
+            inventory_df = pd.DataFrame(inventory_data)
+            customer_df = pd.DataFrame(customer_data)
 
-        sales_df.to_csv(sales_data_path, index=False)
-        inventory_df.to_csv(inventory_data_path, index=False)
-        customer_df.to_csv(customer_data_path, index=False)
+            sales_df.to_csv(sales_data_path, index=False)
+            inventory_df.to_csv(inventory_data_path, index=False)
+            customer_df.to_csv(customer_data_path, index=False)
 
-        st.success("Données de fruits et légumes générées avec succès !")
+            st.success("Données de fruits et légumes générées avec succès !")
     else:
-        # Load existing data
-        sales_df = pd.read_csv(sales_data_path)
-        inventory_df = pd.read_csv(inventory_data_path)
-        customer_df = pd.read_csv(customer_data_path)
+        # Load existing data with loading indicator
+        with st.spinner("Chargement des données..."):
+            sales_df = pd.read_csv(sales_data_path)
+            inventory_df = pd.read_csv(inventory_data_path)
+            customer_df = pd.read_csv(customer_data_path)
 
-        # Convert date columns to datetime
-        sales_df["date"] = pd.to_datetime(sales_df["date"])
-        inventory_df["date"] = pd.to_datetime(inventory_df["date"])
-        customer_df["date"] = pd.to_datetime(customer_df["date"])
+            # Convert date columns to datetime
+            sales_df["date"] = pd.to_datetime(sales_df["date"])
+            inventory_df["date"] = pd.to_datetime(inventory_df["date"])
+            customer_df["date"] = pd.to_datetime(customer_df["date"])
 
     if app_mode == "Vue d'ensemble du tableau de bord":
         dashboard_overview(sales_df, inventory_df, customer_df)
