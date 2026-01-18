@@ -9,3 +9,6 @@ __pycache__/
 *.log
 *.csv
 QWEN.md
+data/
+env/
+lightning_logs/
