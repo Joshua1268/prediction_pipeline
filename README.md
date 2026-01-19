@@ -1,132 +1,134 @@
-# Fruits & Vegetables Predictive Analytics Platform
+# Plateforme d’Analyse Prédictive Fruits & Légumes
 
-## Overview
+**Auteur : Josué Kouassi**
+**Data Scientist & ML Ops Engineer**
 
-The Fruits & Vegetables Predictive Analytics Platform is an AI-driven tool that forecasts demand, optimizes inventory, and manages perishable goods for fruits and vegetables. This system provides a comprehensive solution for agricultural businesses to make data-driven decisions about their inventory and pricing strategies.
+## Présentation générale
 
-## Features
+Cette plateforme a été conçue et développée par **Josué Kouassi, Data Scientist & ML Ops Engineer**, dans une démarche professionnelle visant à démontrer des compétences avancées en analyse prédictive, modélisation statistique et déploiement de solutions data-driven appliquées aux produits périssables.
 
-- **Dashboard Overview**: Visualize key metrics and trends in your fruits and vegetables data
-- **Data Exploration**: Interactive exploration of sales, inventory, and customer data with seasonal insights
-- **Fruits & Vegetables Forecasting**: Predict future demand for individual fruits and vegetables
-- **Inventory Planning**: Optimize inventory levels and suggest reorder points considering perishability
-- **Pricing Optimization**: Dynamic pricing strategies based on demand forecasts and shelf life
+La **Plateforme d’Analyse Prédictive Fruits & Légumes** est un outil basé sur l’IA qui permet de prévoir la demande, d’optimiser les stocks et de gérer les produits périssables (fruits et légumes). Ce système offre une solution complète aux acteurs du secteur agricole et agroalimentaire afin de prendre des décisions éclairées en matière de gestion des stocks et de stratégies de prix.
 
-## Project Structure
+## Fonctionnalités
+
+* **Vue d’ensemble du tableau de bord** : Visualisation des indicateurs clés et des tendances des données fruits et légumes
+* **Exploration des données** : Analyse interactive des ventes, des stocks et des données clients avec des insights saisonniers
+* **Prévision Fruits & Légumes** : Anticipation de la demande future par type de fruit ou de légume
+* **Planification des stocks** : Optimisation des niveaux de stock et suggestion de points de réapprovisionnement en tenant compte de la périssabilité
+* **Optimisation des prix** : Stratégies de tarification dynamique basées sur les prévisions de demande et la durée de conservation
+
+## Structure du projet
 
 ```
-sagemaker_code/
-├── app.py                    # Streamlit web application
-├── generate_synthetic_data.py # Fruits & vegetables data generator
-├── prediction_model.py       # Specialized prediction models for perishables
-├── requirements.txt          # Dependencies
-├── data/                     # Generated synthetic data
+fv_predictive_analytics_platform/
+├── app.py                   
+├── generate_synthetic_data.py 
+├── prediction_model.py      
+├── requirements.txt          
+├── data/                     
 │   ├── fv_sales_data.csv
 │   ├── fv_inventory_data.csv
 │   └── fv_customer_data.csv
-└── README.md               # This file
+└── README.md                 
 ```
 
-## Prerequisites
+## Prérequis
 
-- Python 3.8 or higher
-- pip package manager
+* Python 3.8 ou version ultérieure
+* Gestionnaire de paquets pip
 
 ## Installation
 
-1. Clone or download this repository to your local machine.
+1. Clonez ou téléchargez ce dépôt sur votre machine locale.
 
-2. Navigate to the project directory:
+2. Accédez au répertoire du projet :
+
 ```bash
-cd sagemaker_code
+cd fv_predictive_analytics_platform
 ```
 
-3. Create a virtual environment (recommended):
+3. Créez un environnement virtuel (recommandé) :
+
 ```bash
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Sous Windows : venv\Scripts\activate
 ```
 
-4. Install the required dependencies:
+4. Installez les dépendances requises :
+
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+## Utilisation
 
-### Running the Application
+### Lancer l’application
 
-1. From the project directory, run the Streamlit application:
+1. Depuis le répertoire du projet, lancez l’application Streamlit :
+
 ```bash
 streamlit run app.py
 ```
 
-2. The application will launch in your default browser at `http://localhost:8501`
+2. L’application s’ouvrira dans votre navigateur par défaut à l’adresse `http://localhost:8501`
 
-3. If the browser doesn't open automatically, navigate to the displayed URL manually.
+3. Si le navigateur ne s’ouvre pas automatiquement, accédez manuellement à l’URL affichée.
 
-### Application Sections
+### Sections de l’application
 
-- **Dashboard Overview**: Shows key metrics and visualizations of your fruits and vegetables data
-- **Data Exploration**: Allows filtering and exploration of historical data with seasonal insights
-- **Fruits & Vegetables Forecasting**: Generates demand forecasts for specific fruits and vegetables
-- **Inventory Planning**: Provides inventory optimization recommendations considering shelf life
-- **Pricing Optimization**: Suggests dynamic pricing strategies based on demand forecasts
+* **Tableau de bord** : Présente les indicateurs clés et visualisations des données fruits et légumes
+* **Exploration des données** : Permet de filtrer et d’analyser les données historiques avec une vision saisonnière
+* **Prévisions Fruits & Légumes** : Génère des prévisions de demande pour des produits spécifiques
+* **Planification des stocks** : Fournit des recommandations d’optimisation des stocks en tenant compte de la durée de conservation
+* **Optimisation des prix** : Propose des stratégies de tarification dynamique basées sur les prévisions de demande
 
-### Data Generation
+### Génération des données
 
-The application automatically generates synthetic fruits and vegetables data on first run. If you need to regenerate the data:
+L’application génère automatiquement des données synthétiques de fruits et légumes lors du premier lancement. Pour régénérer les données manuellement :
 
 ```bash
 python generate_synthetic_data.py
 ```
 
-## Model Architecture
+## Architecture des modèles
 
-The platform consists of:
+La plateforme se compose de :
 
-1. **Fruits & Vegetables Data Generator**: Creates realistic sales, inventory, and customer data for fruits and vegetables with seasonal patterns
-2. **Specialized Prediction Model**: Uses Random Forest or Linear Regression to predict demand with consideration for seasonality and perishability
-3. **Forecasting Model**: Extends predictions to future time periods with confidence intervals adjusted for perishable goods
-4. **Inventory Planning Module**: Calculates optimal reorder points and quantities considering shelf life
-5. **Pricing Optimization Engine**: Suggests dynamic pricing based on demand forecasts and perishability
+1. **Générateur de données Fruits & Légumes** : Crée des données réalistes de ventes, de stocks et de clients intégrant des effets saisonniers
+2. **Modèle de prédiction spécialisé** : Utilise des modèles comme Random Forest ou Régression Linéaire pour prédire la demande en intégrant la saisonnalité et la périssabilité
+3. **Modèle de prévision** : Étend les prédictions sur des périodes futures avec des intervalles de confiance adaptés aux produits périssables
+4. **Module de planification des stocks** : Calcule les points de réapprovisionnement et quantités optimales en tenant compte de la durée de vie des produits
+5. **Moteur d’optimisation des prix** : Suggère des prix dynamiques basés sur la demande prévue et la périssabilité
 
-## Customization
+## Dépannage
 
-To use your own data instead of synthetic data:
+* En cas de problème de dépendances, essayez de mettre à jour pip : `pip install --upgrade pip`
+* Si Streamlit ne démarre pas, vérifiez que toutes les dépendances sont installées : `pip install -r requirements.txt`
+* En cas de problèmes de performance avec de grands volumes de données, envisagez un échantillonnage
 
-1. Place your CSV files in the `data/` directory with the following names:
-   - `fv_sales_data.csv`
-   - `fv_inventory_data.csv`
-   - `fv_customer_data.csv`
+## Technologies utilisées
 
-2. Ensure your data follows the same schema as the generated synthetic data
+* **Python** : Langage de programmation principal
+* **Streamlit** : Framework d’application web
+* **Plotly** : Visualisations interactives
+* **Pandas** : Manipulation des données
+* **Scikit-learn** : Algorithmes de machine learning
+* **NumPy** : Calculs numériques
 
-## Troubleshooting
+## À propos de la plateforme
 
-- If you encounter dependency issues, try upgrading pip: `pip install --upgrade pip`
-- If Streamlit fails to start, ensure all dependencies are installed: `pip install -r requirements.txt`
-- For performance issues with large datasets, consider sampling your data
+La Plateforme d’Analyse Prédictive Fruits & Légumes répond aux principaux enjeux de la gestion des produits périssables :
 
-## Technologies Used
+1. **Prévision de la demande** : Anticipation de la demande future avec ajustements saisonniers
+2. **Optimisation des stocks** : Prise en compte de la durée de conservation et de la périssabilité
+3. **Tarification dynamique** : Ajustement des prix en fonction des prévisions de demande et de la durée de vie des produits
+4. **Interface utilisateur** : Interface web basée sur Streamlit pour une utilisation simple
+5. **Analyse saisonnière** : Intégration des schémas saisonniers de consommation des fruits et légumes
 
-- **Python**: Core programming language
-- **Streamlit**: Web application framework
-- **Plotly**: Interactive visualizations
-- **Pandas**: Data manipulation
-- **Scikit-learn**: Machine learning algorithms
-- **NumPy**: Numerical computations
+## Auteur & Crédits
 
-## About the Platform
+**Josué Kouassi**
+*Data Scientist & ML Ops Engineer*
 
-The Fruits & Vegetables Predictive Analytics Platform addresses the key requirements for managing perishable goods:
+Spécialisé en analyse de données, machine learning et industrialisation de modèles (MLOps), avec un intérêt particulier pour les problématiques métier liées à la supply chain, à la prévision de la demande et à l’optimisation des performances opérationnelles.
 
-1. **Demand Forecasting**: Predicts future demand with seasonal adjustments
-2. **Inventory Optimization**: Considers shelf life and perishability in recommendations
-3. **Dynamic Pricing**: Adjusts pricing based on demand forecasts and shelf life
-4. **User Interface**: Streamlit-based web interface for easy interaction
-5. **Seasonal Analysis**: Incorporates seasonal patterns in fruits and vegetables demand
-
-## License
-
-This project is created for demonstration purposes. Feel free to adapt and extend it for your specific use case.

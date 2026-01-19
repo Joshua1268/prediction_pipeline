@@ -15,10 +15,6 @@ warnings.filterwarnings('ignore')
 
 
 class FruitsVegetablesPredictionModel:
-    """
-    A specialized prediction model for fruits and vegetables sales forecasting.
-    This model takes into account seasonal patterns, perishability, and demand fluctuations.
-    """
 
     def __init__(self):
         """
