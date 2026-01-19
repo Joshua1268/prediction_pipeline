@@ -301,17 +301,14 @@ class FruitsVegetablesForecastingModel:
         # Find when inventory might fall below reorder level
         forecast['cumulative_demand'] = forecast['predicted_quantity'].cumsum()
 
-        # Simple inventory simulation considering shelf life
         current_stock = historical_data[
             (historical_data['product_id'] == product_id)
         ]['current_stock'].iloc[-1] if 'current_stock' in historical_data.columns else 100
 
-        # Account for spoilage based on shelf life
         forecast['estimated_stock'] = current_stock - forecast['cumulative_demand']
 
         adjusted_reorder_level = reorder_level if shelf_life > 10 else reorder_level * 1.5
 
-        # Find when to reorder
         reorder_dates = forecast[forecast['estimated_stock'] <= adjusted_reorder_level]
 
         if not reorder_dates.empty:
@@ -352,7 +349,6 @@ class FruitsVegetablesForecastingModel:
         product_info = historical_data[historical_data['product_id'] == product_id].iloc[0]
         shelf_life = product_info.get('shelf_life_days', 7)
 
-        # Calculate average demand over the forecast period
         avg_demand = forecast['predicted_quantity'].mean()
 
         if shelf_life <= 5:  # Highly perishable
