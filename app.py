@@ -22,7 +22,6 @@ def main():
         layout="wide"
     )
 
-    # Professional header
     st.title("Plateforme d'Analyse Prédictive des Fruits & Légumes")
     st.markdown("""
     Outil d'analyse avancé pour la prévision de la demande, l'optimisation des stocks et la gestion des produits périssables pour les fruits et légumes.
@@ -37,7 +36,6 @@ def main():
                                     "Planification des stocks",
                                     "Optimisation des prix"])
     
-    # Generate synthetic data if not already present with loading indicator
     data_dir = "data"
     sales_data_path = os.path.join(data_dir, "fv_sales_data.csv")
     inventory_data_path = os.path.join(data_dir, "fv_inventory_data.csv")
@@ -120,7 +118,7 @@ def dashboard_overview(sales_df, inventory_df, customer_df):
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         ">
             <h3 style="margin: 0; font-size: 1.2em;">Revenu Total</h3>
-            <p style="margin: 10px 0 0 0; font-size: 1.8em; font-weight: bold;">${total_revenue:,.2f}</p>
+            <p style="margin: 10px 0 0 0; font-size: 1.8em; font-weight: bold;">XOF{total_revenue:,.2f}</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -134,7 +132,7 @@ def dashboard_overview(sales_df, inventory_df, customer_df):
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         ">
             <h3 style="margin: 0; font-size: 1.2em;">Profit Total</h3>
-            <p style="margin: 10px 0 0 0; font-size: 1.8em; font-weight: bold;">${total_profit:,.2f}</p>
+            <p style="margin: 10px 0 0 0; font-size: 1.8em; font-weight: bold;">XOF{total_profit:,.2f}</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -175,7 +173,7 @@ def dashboard_overview(sales_df, inventory_df, customer_df):
     peak_season = sales_df.groupby("season")["revenue"].sum().idxmax() if not sales_df.empty and "season" in sales_df.columns else "N/A"
 
     with col5:
-        st.metric(label="Valeur Moyenne des Commandes", value=f"${avg_order_value:.2f}")
+        st.metric(label="Valeur Moyenne des Commandes", value=f"XOF{avg_order_value:.2f}")
     with col6:
         st.metric(label="Nombre de Produits", value=total_products)
     with col7:
@@ -431,7 +429,7 @@ def product_forecasting(sales_df):
                         border-left: 5px solid #9c27b0;
                     ">
                         <h4 style="margin: 0; color: #9c27b0;">Revenu Total</h4>
-                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">${total_historical_revenue:,.2f}</p>
+                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">XOF{total_historical_revenue:,.2f}</p>
                     </div>
                     """, unsafe_allow_html=True)
 
@@ -457,7 +455,7 @@ def product_forecasting(sales_df):
                         border-left: 5px solid #4caf50;
                     ">
                         <h4 style="margin: 0; color: #4caf50;">Prix Moyen</h4>
-                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">${avg_price:.2f}</p>
+                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">XOF{avg_price:.2f}</p>
                     </div>
                     """, unsafe_allow_html=True)
 
@@ -744,7 +742,7 @@ def pricing_optimization(sales_df):
 
     # Get current price
     current_price = product_data["unit_price"].iloc[0]
-    current_price = st.number_input("Prix Unitaire Actuel ($):", value=float(current_price), min_value=0.01, step=0.01)
+    current_price = st.number_input("Prix Unitaire Actuel (XOF):", value=float(current_price), min_value=0.01, step=0.01)
 
     # Forecast horizon for pricing
     forecast_days = st.slider("Horizon de prévision pour les prix (jours):", min_value=7, max_value=30, value=14, step=1)
@@ -777,7 +775,7 @@ def pricing_optimization(sales_df):
                         border-left: 5px solid #2196f3;
                     ">
                         <h4 style="margin: 0; color: #2196f3;">Prix Actuel</h4>
-                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">${pricing_recommendation['current_price']:.2f}</p>
+                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">XOF{pricing_recommendation['current_price']:.2f}</p>
                     </div>
                     """, unsafe_allow_html=True)
 
@@ -790,7 +788,7 @@ def pricing_optimization(sales_df):
                         border-left: 5px solid #9c27b0;
                     ">
                         <h4 style="margin: 0; color: #9c27b0;">Prix Suggéré</h4>
-                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">${pricing_recommendation['suggested_price']:.2f}</p>
+                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">XOF{pricing_recommendation['suggested_price']:.2f}</p>
                     </div>
                     """, unsafe_allow_html=True)
 
@@ -809,7 +807,7 @@ def pricing_optimization(sales_df):
                         border-left: 5px solid {color};
                     ">
                         <h4 style="margin: 0; color: {color};">Variation de Prix</h4>
-                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">{symbol}${price_diff:.2f}</p>
+                        <p style="font-size: 1.5em; font-weight: bold; margin: 5px 0 0 0;">{symbol}XOF{price_diff:.2f}</p>
                     </div>
                     """, unsafe_allow_html=True)
 

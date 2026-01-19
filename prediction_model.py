@@ -226,17 +226,15 @@ class FruitsVegetablesForecastingModel:
         Returns:
             pd.DataFrame: Forecast results
         """
-        # Filter data for the specific product
         product_data = historical_data[historical_data['product_id'] == product_id].copy()
 
         if product_data.empty:
             print(f"No historical data found for product {product_id}")
             return None
 
-        # Train the model on historical data
+        
         self.prediction_model.train(product_data)
 
-        # Create future dates for prediction
         last_date = pd.to_datetime(product_data['date']).max()
         future_dates = []
 
@@ -258,14 +256,12 @@ class FruitsVegetablesForecastingModel:
 
         future_df = pd.DataFrame(future_dates)
 
-        # Make predictions
         predictions = self.prediction_model.predict(future_df)
 
         forecast_results = []
         for i, pred in enumerate(predictions):
             # Adjust confidence intervals based on perishability
             shelf_life = future_df.iloc[i]['shelf_life_days']
-            # Shorter shelf life = wider confidence interval due to higher uncertainty
             conf_lower_mult = 0.7 if shelf_life < 7 else 0.8
             conf_upper_mult = 1.3 if shelf_life < 7 else 1.2
 
