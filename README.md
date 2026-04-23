@@ -1,11 +1,11 @@
 # Plateforme d’Analyse Prédictive Fruits & Légumes
 
 **Auteur : Josué Kouassi**
-**Data Scientist & ML Ops Engineer**
+*ML Engineer & AI Engineer*
 
 ## Présentation générale
 
-Cette plateforme a été conçue et développée par **Josué Kouassi, Data Scientist & ML Ops Engineer**, dans une démarche professionnelle visant à démontrer des compétences avancées en analyse prédictive, modélisation statistique et déploiement de solutions data-driven appliquées aux produits périssables.
+Cette plateforme a été conçue et développée par **Josué Kouassi, ML Engineer & AI Engineer**, dans une démarche professionnelle visant à démontrer des compétences avancées en analyse prédictive, modélisation statistique et déploiement de solutions data-driven appliquées aux produits périssables.
 
 La **Plateforme d’Analyse Prédictive Fruits & Légumes** est un outil basé sur l’IA qui permet de prévoir la demande, d’optimiser les stocks et de gérer les produits périssables (fruits et légumes). Ce système offre une solution complète aux acteurs du secteur agricole et agroalimentaire afin de prendre des décisions éclairées en matière de gestion des stocks et de stratégies de prix.
 
@@ -21,15 +21,15 @@ La **Plateforme d’Analyse Prédictive Fruits & Légumes** est un outil basé s
 
 ```
 fv_predictive_analytics_platform/
-├── app.py                   
-├── generate_synthetic_data.py 
-├── prediction_model.py      
-├── requirements.txt          
-├── data/                     
-│   ├── fv_sales_data.csv
-│   ├── fv_inventory_data.csv
-│   └── fv_customer_data.csv
-└── README.md                 
+├── app.py
+├── generate_synthetic_data.py
+├── prediction_model.py
+├── requirements.txt
+├── data/
+│ ├── fv_sales_data.csv
+│ ├── fv_inventory_data.csv
+│ └── fv_customer_data.csv
+└── README.md
 ```
 
 ## Prérequis
@@ -51,7 +51,7 @@ cd fv_predictive_analytics_platform
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate  # Sous Windows : venv\Scripts\activate
+source venv/bin/activate # Sous Windows : venv\Scripts\activate
 ```
 
 4. Installez les dépendances requises :
@@ -128,7 +128,9 @@ La Plateforme d’Analyse Prédictive Fruits & Légumes répond aux principaux e
 ## Auteur & Crédits
 
 **Josué Kouassi**
-*Data Scientist & ML Ops Engineer*
+*ML Engineer & AI Engineer*
 
-Spécialisé en analyse de données, machine learning et industrialisation de modèles (MLOps), avec un intérêt particulier pour les problématiques métier liées à la supply chain, à la prévision de la demande et à l’optimisation des performances opérationnelles.
+Email : josue.kouassi.ds@gmail.com
+
+Spécialisé en machine learning, intelligence artificielle et industrialisation de modèles, avec un intérêt particulier pour les problématiques métier liées à la supply chain, à la prévision de la demande et à l’optimisation des performances opérationnelles.
 
